@@ -25,10 +25,8 @@ spec:
   {{- end }}
   endpoints:
     - path: /metrics
-      port: "{{ .Values.service.port }}"
-  {{- if .Values.serviceMonitor.interval }}
+      port: http
       interval: {{ .Values.serviceMonitor.interval }}
-  {{- end }}
   {{- if .Values.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
   {{- end }}
