@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: "1.16.0"
+version: 0.1.0
+name: selectel-exporter
+description: A Helm chart for prometheus selectel-exporter
+type: application
+home: https://github.com/ktsstudio/selectel-exporter/
+sources:
+  - https://github.com/ktsstudio/selectel-exporter/
+keywords:
+  - selectel-exporter
+  - prometheus
+  - exporter
+maintainers:
+  - email: alex@ktsstudio.ru
+    name: alexopryshko
