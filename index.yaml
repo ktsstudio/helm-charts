@@ -3,6 +3,26 @@ entries:
   selectel-exporter:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-28T20:37:01.673556136Z"
+    description: A Helm chart for prometheus selectel-exporter
+    digest: 7ea75dab3f4818f4692683e7c8d6aad14e64252576cab893511b212a07920919
+    home: https://github.com/ktsstudio/selectel-exporter/
+    keywords:
+    - selectel-exporter
+    - prometheus
+    - exporter
+    maintainers:
+    - email: alex@ktsstudio.ru
+      name: alexopryshko
+    name: selectel-exporter
+    sources:
+    - https://github.com/ktsstudio/selectel-exporter/
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/selectel-exporter-1.0.1/selectel-exporter-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-24T11:23:02.40228557Z"
     description: A Helm chart for prometheus selectel-exporter
     digest: e0e8eb44201b5b2c5be3dd569cb139c8d9d3dc4e70acd8f26b128d1c37b5ddf2
