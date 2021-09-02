@@ -1,6 +1,6 @@
 # Prometheus Selectel Exporter
 
-A Prometheus exporter for Selectel services (managed databases).
+A Prometheus exporter for Selectel services ([Github](https://github.com/ktsstudio/selectel-exporter)). 
 
 This chart bootstraps an exporter deployment on a Kubernetes cluster using the Helm package manager.
 
