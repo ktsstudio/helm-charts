@@ -1,6 +1,38 @@
 apiVersion: v1
 entries:
+  mirrors:
+  - apiVersion: v2
+    appVersion: 0.2.3
+    created: "2022-04-05T14:57:04.861131782Z"
+    description: mirrors controller
+    digest: 1e5bd4816cae49a61c81567b06cf36d46442744be11eec72522cbe90176851f2
+    home: https://github.com/ktsstudio/mirrors
+    name: mirrors
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/mirrors-0.1.1/mirrors-0.1.1.tgz
+    version: 0.1.1
   selectel-exporter:
+  - apiVersion: v2
+    appVersion: 1.0.2
+    created: "2022-04-05T14:57:05.085840552Z"
+    description: A Helm chart for prometheus selectel-exporter
+    digest: 60db13be5a2fd261650c6e47809a1b24ae5a7d58e8809e4bedf821eb5db7f015
+    home: https://github.com/ktsstudio/selectel-exporter/
+    keywords:
+    - selectel-exporter
+    - prometheus
+    - exporter
+    maintainers:
+    - email: alex@ktsstudio.ru
+      name: alexopryshko
+    name: selectel-exporter
+    sources:
+    - https://github.com/ktsstudio/selectel-exporter/
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/selectel-exporter-1.0.3/selectel-exporter-1.0.3.tgz
+    version: 1.0.3
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-09-02T15:32:31.298969279Z"
