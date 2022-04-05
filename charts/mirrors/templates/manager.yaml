@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mirrors.fullname" . }}-controller-manager
+  labels:
+    {{- include "mirrors.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mirrors.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mirrors.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        {{- if .Values.rbacProxy.enabled }}
+        - name: kube-rbac-proxy
+          image: "{{ .Values.rbacProxy.image.repository }}:{{ .Values.rbacProxy.image.tag }}"
+          imagePullPolicy: {{ .Values.rbacProxy.image.pullPolicy }}
+          args:
+            - "--secure-listen-address=0.0.0.0:8443"
+            - "--upstream=http://127.0.0.1:8080/"
+            - "--logtostderr=true"
+            - "--v=10"
+          ports:
+            - containerPort: 8443
+              name: https
+        {{- end }}
+        - command:
+            - /manager
+          args:
+            - --leader-elect
+            {{- if .Values.rbacProxy.enabled }}
+            - "--health-probe-bind-address=:8081"
+            - "--metrics-bind-address=127.0.0.1:8080"
+            {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: mirrors
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.webhooks.enabled }}
+          ports:
+            - containerPort: 9443
+              name: webhook-server
+              protocol: TCP
+          {{- end }}
+          volumeMounts:
+          {{- if .Values.webhooks.enabled }}
+            - mountPath: /tmp/k8s-webhook-server/serving-certs
+              name: cert
+              readOnly: true
+          {{- end }}
+          env:
+            - name: ENABLE_WEBHOOKS
+              value: {{ .Values.webhooks.enabled | quote }}
+      serviceAccountName: {{ include "mirrors.serviceAccountName" . }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- if .Values.webhooks.enabled }}
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: {{ include "mirrors.fullname" . }}-webhook-server-cert
+      {{- end }}

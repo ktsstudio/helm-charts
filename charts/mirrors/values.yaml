@@ -1,0 +1,108 @@
+nameOverride: ""
+fullnameOverride: ""
+
+# Whether to install CRDs as part of Helm release or not
+installCRDs: true
+
+# Replica count of mirrors controller pod
+replicaCount: 1
+
+# Docker image of a mirrors controller
+image:
+  repository: ktshub/mirrors
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# Image pull secrets of a mirrors controller pod
+imagePullSecrets: []
+
+# ServiceAccount which will be used by a mirrors controller
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+rbac:
+  # Setups RBAC roles and role bindings to a service account
+  create: true
+
+  # Whether to create a ClusterRole which aggregates to global view role
+  viewerRole: true
+
+  # Whether to create a ClusterRole which aggregates to global edit role
+  editorRole: true
+
+# Configures an rbac proxy for controller pod
+rbacProxy:
+  enabled: true
+  image:
+    repository: gcr.io/kubebuilder/kube-rbac-proxy
+    pullPolicy: IfNotPresent
+    tag: "v0.8.0"
+
+# Arbitrary annotations added to mirrors controller pod
+podAnnotations: {}
+
+# podSecurityContext of a mirrors controller pod
+podSecurityContext:
+  runAsNonRoot: true
+
+# SecurityContext of mirrors controller containers
+securityContext:
+  allowPrivilegeEscalation: false
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# Resources of a main container in controller pod
+resources:
+  limits:
+    cpu: 150m
+    memory: 250Mi
+  requests:
+    cpu: 5m
+    memory: 100Mi
+
+# NodeSelector of mirrors controller pod
+nodeSelector: {}
+
+# Tolerations of mirrors controller pod
+tolerations: []
+
+# Affinity of mirrors controller pod
+affinity: {}
+
+# Specifies how long to wait a controller pod to terminate
+terminationGracePeriodSeconds: 10
+
+# Manages webhooks configuration (Validating and Mutating)
+webhooks:
+  # Enables ot disables webhooks creating
+  enabled: true
+  cert:
+    # specify a CA bundle if not using certmanager
+    caBundle: ""
+    certmanager:
+      # enables automatic certificate creation via cert-manager
+      enabled: true
+
+      # clusterDomain is used to specify correctly a DNS for automatic certificate generation
+      clusterDomain: cluster.local
+
+      # certificate is valid through
+      duration: 8760h # 1y
+
+      # how often to renew
+      renewBefore: 730h # 1m
+
+# Controls creation of a ServiceMonitor
+serviceMonitor:
+  enabled: false

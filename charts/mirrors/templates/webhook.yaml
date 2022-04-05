@@ -1,0 +1,78 @@
+{{- if .Values.webhooks.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mirrors.fullname" . }}-webhook-service
+spec:
+  ports:
+    - port: 443
+      targetPort: 9443
+  selector:
+    {{- include "mirrors.selectorLabels" . | nindent 4 }}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ include "mirrors.fullname" . }}-mutating-webhook-configuration
+  {{- if .Values.webhooks.cert.certmanager.enabled }}
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-serving-cert
+  {{- end }}
+webhooks:
+  - admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      {{- if not .Values.webhooks.cert.certmanager }}
+      caBundle: {{ .Values.webhooks.cert.caBundle }}
+      {{- end }}
+      service:
+        name: {{ include "mirrors.fullname" . }}-webhook-service
+        namespace: {{ .Release.Namespace }}
+        path: /mutate-mirrors-kts-studio-v1alpha2-secretmirror
+    failurePolicy: Fail
+    name: msecretmirror.kb.io
+    rules:
+      - apiGroups:
+          - mirrors.kts.studio
+        apiVersions:
+          - v1alpha2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - secretmirrors
+    sideEffects: None
+
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "mirrors.fullname" . }}-validating-webhook-configuration
+  {{- if .Values.webhooks.cert.certmanager.enabled }}
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-serving-cert
+  {{- end }}
+webhooks:
+  - admissionReviewVersions:
+      - v1
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "mirrors.fullname" . }}-webhook-service
+        namespace: {{ .Release.Namespace }}
+        path: /validate-mirrors-kts-studio-v1alpha2-secretmirror
+    failurePolicy: Fail
+    name: vsecretmirror.kb.io
+    rules:
+      - apiGroups:
+          - mirrors.kts.studio
+        apiVersions:
+          - v1alpha2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - secretmirrors
+    sideEffects: None
+{{- end }}

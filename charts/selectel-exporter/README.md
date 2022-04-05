@@ -6,7 +6,7 @@ This chart bootstraps an exporter deployment on a Kubernetes cluster using the H
 
 Get Repo Info
 ```shell
-helm repo add kts https://ktsstudio.github.io/helm-charts
+helm repo add kts https://charts.kts.studio
 helm repo update
 ```
 See helm repo for command documentation.
@@ -45,17 +45,17 @@ helm show values kts/selectel-exporter
 
 Chart specific settings:
 
-Variable | Help
----------|-----
-selectel.token|Selectel API token. It can be obtained in this [section](https://my.selectel.ru/profile/apikeys)
-selectel.region|Region of your Selectel resources
-serviceMonitor.enabled|should be set to true to enable prometheus-operator discovery of this service
-serviceMonitor.interval|interval is the interval at which metrics should be scraped, default value is 60s
-serviceMonitor.scrapeTimeout|timeout after which the scrape is ended
-serviceMonitor.additionalLabels|set of additional labels to add to the ServiceMonitor
-serviceMonitor.jobLabel|value of metric`s label job  
-serviceMonitor.targetLabels|transfers labels from the Kubernetes Service onto the created metrics.
-serviceMonitor.podTargetLabels|transfers labels on the Kubernetes Pod onto the created metrics.
-serviceMonitor.metricRelabelings|MetricRelabelConfigs to apply to samples before ingestion.
+| Variable                         | Help                                                                                             |
+|----------------------------------|--------------------------------------------------------------------------------------------------|
+| selectel.token                   | Selectel API token. It can be obtained in this [section](https://my.selectel.ru/profile/apikeys) |
+| selectel.region                  | Region of your Selectel resources                                                                |
+| serviceMonitor.enabled           | should be set to true to enable prometheus-operator discovery of this service                    |
+| serviceMonitor.interval          | interval is the interval at which metrics should be scraped, default value is 60s                |
+| serviceMonitor.scrapeTimeout     | timeout after which the scrape is ended                                                          |
+| serviceMonitor.additionalLabels  | set of additional labels to add to the ServiceMonitor                                            |
+| serviceMonitor.jobLabel          | value of metric`s label job                                                                      |
+| serviceMonitor.targetLabels      | transfers labels from the Kubernetes Service onto the created metrics.                           |
+| serviceMonitor.podTargetLabels   | transfers labels on the Kubernetes Pod onto the created metrics.                                 |
+| serviceMonitor.metricRelabelings | MetricRelabelConfigs to apply to samples before ingestion.                                       |
 
 Other collector flags can be found in the values.yaml

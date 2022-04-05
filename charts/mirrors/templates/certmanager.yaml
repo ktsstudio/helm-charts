@@ -1,0 +1,23 @@
+{{ if and .Values.webhooks.enabled .Values.webhooks.cert.certmanager.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "mirrors.fullname" . }}-selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "mirrors.fullname" . }}-serving-cert
+spec:
+  dnsNames:
+    - {{ include "mirrors.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc
+    - {{ include "mirrors.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc.{{ .Values.webhooks.cert.certmanager.clusterDomain }}
+  issuerRef:
+    kind: Issuer
+    name: {{ include "mirrors.fullname" . }}-selfsigned-issuer
+  secretName: {{ include "mirrors.fullname" . }}-webhook-server-cert
+  duration: {{ .Values.webhooks.cert.certmanager.duration }}
+  renewBefore: {{ .Values.webhooks.cert.certmanager.renewBefore }}
+{{ end }}

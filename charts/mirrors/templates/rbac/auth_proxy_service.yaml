@@ -1,0 +1,15 @@
+{{- if and .Values.rbac.create .Values.rbacProxy.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    {{- include "mirrors.selectorLabels" . | nindent 4 }}
+  name: {{ include "mirrors.fullname" . }}-controller-manager-metrics-service
+spec:
+  ports:
+  - name: https
+    port: 8443
+    targetPort: https
+  selector:
+    {{- include "mirrors.selectorLabels" . | nindent 4 }}
+{{- end }}

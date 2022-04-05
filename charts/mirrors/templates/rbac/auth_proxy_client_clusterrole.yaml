@@ -1,0 +1,11 @@
+{{- if and .Values.rbac.create .Values.rbacProxy.enabled -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "mirrors.fullname" . }}-metrics-reader
+rules:
+- nonResourceURLs:
+  - "/metrics"
+  verbs:
+  - get
+{{- end }}
