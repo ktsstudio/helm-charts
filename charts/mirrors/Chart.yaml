@@ -2,6 +2,6 @@ apiVersion: v2
 name: mirrors
 description: mirrors controller
 type: application
-version: 0.1.1
+version: 0.1.2
 appVersion: "0.2.3"
 home: https://github.com/ktsstudio/mirrors
