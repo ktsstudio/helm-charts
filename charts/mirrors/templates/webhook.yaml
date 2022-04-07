@@ -16,7 +16,7 @@ metadata:
   name: {{ include "mirrors.fullname" . }}-mutating-webhook-configuration
   {{- if .Values.webhooks.cert.certmanager.enabled }}
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-serving-cert
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-webhook-server-cert
   {{- end }}
 webhooks:
   - admissionReviewVersions:
@@ -51,7 +51,7 @@ metadata:
   name: {{ include "mirrors.fullname" . }}-validating-webhook-configuration
   {{- if .Values.webhooks.cert.certmanager.enabled }}
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-serving-cert
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "mirrors.fullname" . }}-webhook-server-cert
   {{- end }}
 webhooks:
   - admissionReviewVersions:
