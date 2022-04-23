@@ -9,7 +9,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ include "mirrors.fullname" . }}-serving-cert
+  name: {{ include "mirrors.fullname" . }}-webhook-server-cert
 spec:
   dnsNames:
     - {{ include "mirrors.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc
