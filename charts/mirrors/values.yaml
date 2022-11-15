@@ -93,6 +93,8 @@ webhooks:
     certmanager:
       # enables automatic certificate creation via cert-manager
       enabled: true
+      external_issuer:
+        enabled: false
 
       # clusterDomain is used to specify correctly a DNS for automatic certificate generation
       clusterDomain: cluster.local

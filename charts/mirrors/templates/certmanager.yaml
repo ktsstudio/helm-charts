@@ -1,10 +1,12 @@
 {{ if and .Values.webhooks.enabled .Values.webhooks.cert.certmanager.enabled }}
+{{ if not (and .Values.webhooks.cert.certmanager.external_issuer .Values.webhooks.cert.certmanager.external_issuer.enabled) }}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: {{ include "mirrors.fullname" . }}-selfsigned-issuer
 spec:
   selfSigned: {}
+{{ end }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -15,8 +17,13 @@ spec:
     - {{ include "mirrors.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc
     - {{ include "mirrors.fullname" . }}-webhook-service.{{ .Release.Namespace }}.svc.{{ .Values.webhooks.cert.certmanager.clusterDomain }}
   issuerRef:
+    {{ if and .Values.webhooks.cert.certmanager.external_issuer .Values.webhooks.cert.certmanager.external_issuer.enabled }}
+    kind: {{ default "ClusterIssuer" .Values.webhooks.cert.certmanager.external_issuer.kind }}
+    name: {{ .Values.webhooks.cert.certmanager.external_issuer.name }}
+    {{ else }}
     kind: Issuer
     name: {{ include "mirrors.fullname" . }}-selfsigned-issuer
+    {{ end }}
   secretName: {{ include "mirrors.fullname" . }}-webhook-server-cert
   duration: {{ .Values.webhooks.cert.certmanager.duration }}
   renewBefore: {{ .Values.webhooks.cert.certmanager.renewBefore }}
