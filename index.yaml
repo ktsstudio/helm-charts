@@ -14,6 +14,17 @@ entries:
   mirrors:
   - apiVersion: v2
     appVersion: 0.2.5
+    created: "2022-11-15T14:04:22.436111783Z"
+    description: mirrors controller
+    digest: f7a83420be1459084d50bb11964df9927178eed1435a61ad798a9ffc27b2ac48
+    home: https://github.com/ktsstudio/mirrors
+    name: mirrors
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/mirrors-0.1.7/mirrors-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 0.2.5
     created: "2022-04-23T02:01:09.196366986Z"
     description: mirrors controller
     digest: 1c3ede302274deb10397249b19eb129e0f4a48d7a7c2c5e05529bbf7b3f213f0
