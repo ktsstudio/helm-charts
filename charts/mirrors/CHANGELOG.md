@@ -1,5 +1,8 @@
 # mirrors chart
 
+## 0.1.7
+* Use caBundle when certmanager.enabled is false
+
 ## 0.1.6
 * Fix cert name
 
