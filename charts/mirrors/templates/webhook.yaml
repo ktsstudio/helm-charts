@@ -23,7 +23,7 @@ webhooks:
       - v1
       - v1beta1
     clientConfig:
-      {{- if not .Values.webhooks.cert.certmanager }}
+      {{- if or (not .Values.webhooks.cert.certmanager) (not .Values.webhooks.cert.certmanager.enabled) }}
       caBundle: {{ .Values.webhooks.cert.caBundle }}
       {{- end }}
       service:
