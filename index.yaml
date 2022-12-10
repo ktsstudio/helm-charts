@@ -11,6 +11,22 @@ entries:
     urls:
     - https://github.com/ktsstudio/helm-charts/releases/download/clickhouse-bulk-0.0.1/clickhouse-bulk-0.0.1.tgz
     version: 0.0.1
+  es2loki:
+  - apiVersion: v2
+    appVersion: 0.1.4
+    created: "2022-12-10T20:31:59.666018973Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    description: Elasticsearch to Grafana Loki logs transfer library
+    digest: 6730c5a479510a2f888d54d92344f8bfd31b5f907c2c2ce8508afb212f6f50af
+    name: es2loki
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/es2loki-0.1.4/es2loki-0.1.4.tgz
+    version: 0.1.4
   mirrors:
   - apiVersion: v2
     appVersion: 0.2.5
@@ -190,4 +206,4 @@ entries:
     urls:
     - https://github.com/ktsstudio/helm-charts/releases/download/selectel-exporter-0.1.1/selectel-exporter-0.1.1.tgz
     version: 0.1.1
-generated: "2021-08-22T21:24:33.673790206Z"
+generated: "2022-12-10T20:31:59.666169972Z"
