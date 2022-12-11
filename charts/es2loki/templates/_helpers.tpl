@@ -62,7 +62,7 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
-PostgreSQL addr for es2loki persistence
+state database addr for es2loki persistence
 */}}
 {{- define "es2loki.stateDatabaseAddr" -}}
 {{- if .Values.stateDatabaseAddr }}

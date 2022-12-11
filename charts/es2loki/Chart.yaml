@@ -2,8 +2,8 @@ apiVersion: v2
 name: es2loki
 description: Elasticsearch to Grafana Loki logs transfer library
 type: application
-version: 0.1.4
-appVersion: "0.1.4"
+version: 1.0.0
+appVersion: "0.1.5"
 dependencies:
 - name: postgresql
   version: "12.1.3"
