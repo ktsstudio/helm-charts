@@ -13,6 +13,21 @@ entries:
     version: 0.0.1
   es2loki:
   - apiVersion: v2
+    appVersion: 0.1.5
+    created: "2022-12-11T14:04:31.269426957Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.3
+    description: Elasticsearch to Grafana Loki logs transfer library
+    digest: 51a8166c8eebd6d99faaef2ef1ba739ba4cb9a7c2980f44cd5003a5cd2f7aadf
+    name: es2loki
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/es2loki-1.0.0/es2loki-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     appVersion: 0.1.4
     created: "2022-12-10T20:31:59.666018973Z"
     dependencies:
@@ -206,4 +221,4 @@ entries:
     urls:
     - https://github.com/ktsstudio/helm-charts/releases/download/selectel-exporter-0.1.1/selectel-exporter-0.1.1.tgz
     version: 0.1.1
-generated: "2022-12-10T20:31:59.666169972Z"
+generated: "2022-12-11T14:04:31.269471458Z"
