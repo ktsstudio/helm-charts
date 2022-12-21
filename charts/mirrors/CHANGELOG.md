@@ -1,5 +1,8 @@
 # mirrors chart
 
+## 0.1.8
+* Ability to inject an existing Issuer or ClusterIssuer instead of creating a new one
+
 ## 0.1.7
 * Use caBundle when certmanager.enabled is false
 
