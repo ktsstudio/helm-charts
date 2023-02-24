@@ -59,6 +59,17 @@ entries:
     version: 0.1.4
   mirrors:
   - apiVersion: v2
+    appVersion: 0.2.7
+    created: "2023-02-24T15:35:17.932188678Z"
+    description: mirrors controller
+    digest: 8233d54437e2ca7be56c96e94ab11c6299574d6493f8fab1a0876b14a5b0ce58
+    home: https://github.com/ktsstudio/mirrors
+    name: mirrors
+    type: application
+    urls:
+    - https://github.com/ktsstudio/helm-charts/releases/download/mirrors-0.1.8/mirrors-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
     appVersion: 0.2.5
     created: "2022-11-15T14:04:22.436111783Z"
     description: mirrors controller
@@ -236,4 +247,4 @@ entries:
     urls:
     - https://github.com/ktsstudio/helm-charts/releases/download/selectel-exporter-0.1.1/selectel-exporter-0.1.1.tgz
     version: 0.1.1
-generated: "2022-12-12T11:50:57.704900689Z"
+generated: "2023-02-24T15:35:17.932261678Z"
