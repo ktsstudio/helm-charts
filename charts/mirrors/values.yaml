@@ -7,6 +7,12 @@ installCRDs: true
 # Replica count of mirrors controller pod
 replicaCount: 1
 
+# controller env variables, for example:
+# env:
+#   - name: VAULT_SKIP_VERIFY
+#     value: 'true'
+env: []
+
 # Docker image of a mirrors controller
 image:
   repository: ktshub/mirrors

@@ -1,5 +1,8 @@
 # mirrors chart
 
+## 0.1.9
+* Added support for specifying extra controller env vars
+
 ## 0.1.7
 * Use caBundle when certmanager.enabled is false
 

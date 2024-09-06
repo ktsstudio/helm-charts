@@ -80,6 +80,10 @@ spec:
           env:
             - name: ENABLE_WEBHOOKS
               value: {{ .Values.webhooks.enabled | quote }}
+            {{- range .Values.env }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
       serviceAccountName: {{ include "mirrors.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       {{- with .Values.nodeSelector }}
